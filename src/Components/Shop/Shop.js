@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { addToDb } from "../../Utilities/fakedb";
 import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
@@ -18,6 +19,7 @@ const Shop = () => {
     const handleAddToCart = (product) => {
         const newCart = [...cart, product];
         setCart(newCart);
+        addToDb(product.id);
     };
     return (
         <Container>
