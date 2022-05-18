@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import OrderSummery from "../OrderSummery/OrderSummery";
+import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
 
@@ -28,7 +28,7 @@ const Shop = () => {
                     ))}
                 </Col>
                 <Col className="order-summery" lg={3}>
-                    <OrderSummery cart={cart}></OrderSummery>
+                    <Cart cart={cart}></Cart>
                 </Col>
             </Row>
         </Container>

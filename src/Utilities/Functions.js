@@ -5,4 +5,10 @@ function capitalizeWords(string) {
     });
 }
 
-export { capitalizeWords };
+// Calculate Total Amounts
+const calculateTotal = (arr, amount) => arr.reduce((acc, curr) => acc + curr[amount], 0);
+
+// Calculate Tax
+const calculateTax = (percentage, amount) => Math.round(percentage * amount);
+
+export { capitalizeWords, calculateTotal, calculateTax };
