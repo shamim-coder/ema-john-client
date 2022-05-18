@@ -1,7 +1,7 @@
+import React from "react";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { capitalizeWords } from "../../Utilities/Functions";
+import { capitalizeWords } from "../../Utilities/functions";
 import "./Product.css";
 
 const Product = ({ product, handleAddToCart }) => {
