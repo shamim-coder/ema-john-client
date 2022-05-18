@@ -5,8 +5,4 @@ function capitalizeWords(string) {
     });
 }
 
-// Handle Add to Cart
-const handleAddToCart = (product) => {
-    console.log(product);
-};
-export { capitalizeWords, handleAddToCart };
+export { capitalizeWords };

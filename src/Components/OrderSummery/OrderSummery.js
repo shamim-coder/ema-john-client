@@ -2,11 +2,11 @@ import { faArrowRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-const OrderSummery = () => {
+const OrderSummery = ({ cart }) => {
     return (
         <React.Fragment>
             <h2>Order Summery</h2>
-            <p>Selected Items: 6</p>
+            <p>Selected Items: {cart.length}</p>
             <p>Total Price: $1140</p>
             <p>Total Shipping Charge: $5</p>
             <p>Tax: $114</p>
