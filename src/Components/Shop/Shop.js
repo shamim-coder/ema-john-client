@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { handleAddToCart } from "../../Utilities/Functions";
 import OrderSummery from "../OrderSummery/OrderSummery";
-import Products from "../Products/Products";
+import Product from "../Product/Product";
 import "./Shop.css";
 
 const Shop = () => {
@@ -14,9 +15,10 @@ const Shop = () => {
     return (
         <Container>
             <Row>
-                <Col className="products" lg={9}>
-                    <h3>{products.length}</h3>
-                    <Products products={products}></Products>
+                <Col className="products mt-4">
+                    {products.map((product) => (
+                        <Product key={product.id} handleAddToCart={handleAddToCart} product={product}></Product>
+                    ))}
                 </Col>
                 <Col className="order-summery" lg={3}>
                     <OrderSummery></OrderSummery>
