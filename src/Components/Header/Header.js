@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
 import Logo from "../../Images/Logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { getCartItems } from "../../Utilities/fakedb";
 
 const Header = () => {
+    // const [cart, setCart] = useState([]);
+
+    // useEffect(() => {
+    //     const cartItems = getCartItems();
+    //     const cartKey = Object.keys(cartItems);
+    //     setCart(cartKey);
+    // }, [getCartItems()]);
+
     return (
         <Navbar variant="dark">
             <Container>
@@ -21,9 +30,7 @@ const Header = () => {
                     <Nav.Link href="/login">Login</Nav.Link>
 
                     <div type="button" style={{ color: "white" }} className="btn position-relative">
-                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            9<span className="visually-hidden">unread messages</span>
-                        </span>
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">{0}</span>
                         <FontAwesomeIcon icon={faShoppingCart} />
                     </div>
                 </Nav>
