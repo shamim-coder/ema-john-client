@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { addToDb } from "../../Utilities/fakedb";
+import { addToDb, getCartItems } from "../../Utilities/fakedb";
 import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
@@ -21,6 +21,20 @@ const Shop = () => {
         setCart(newCart);
         addToDb(product.id);
     };
+
+    useEffect(() => {
+        const cartItems = getCartItems();
+        for (const id in cartItems) {
+            const addedItem = products.find((product) => product.id === id);
+
+            if (addedItem) {
+                const quantity = cartItems[id];
+                addedItem.quantity = quantity;
+                console.log(addedItem);
+            }
+        }
+    }, [products]);
+
     return (
         <Container>
             <Row>
