@@ -1,6 +1,7 @@
 import { faArrowRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { deleteShoppingCart } from "../../Utilities/fakedb";
 import { calculateTax, calculateTotal } from "../../Utilities/functions";
 import "./Cart.css";
 
@@ -17,6 +18,11 @@ const Cart = ({ cart }) => {
     const tax = calculateTax(0.15, total + shipping);
     const grandTotal = total + tax + shipping;
 
+    const handleRemove = () => {
+        deleteShoppingCart();
+        window.location.reload(true);
+    };
+
     return (
         <div className="order-sum">
             <h2>Order Summery</h2>
@@ -26,7 +32,7 @@ const Cart = ({ cart }) => {
             <p>Tax: ${tax}</p>
             <h4>Grand Total: ${grandTotal}</h4>
 
-            <button>
+            <button onClick={handleRemove}>
                 Clear Cart <FontAwesomeIcon icon={faTrashCan} />{" "}
             </button>
             <button>

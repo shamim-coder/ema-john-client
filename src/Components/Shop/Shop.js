@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { addToDb, getCartItems } from "../../Utilities/fakedb";
+import Loader from "../../Utilities/Loader";
 import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
@@ -10,14 +11,19 @@ const Shop = () => {
     useEffect(() => {
         fetch("data/products.json")
             .then((res) => res.json())
-            .then((data) => setProducts(data));
+            .then((data) => {
+                setProducts(data);
+                setLoader(false);
+            });
     }, []);
 
     const [cart, setCart] = useState([]);
+    const [loader, setLoader] = useState(true);
 
     // Handle Add to Cart
     const handleAddToCart = (selectedProduct) => {
         const exists = cart.find((product) => product.id === selectedProduct.id);
+
         let newCart = [];
 
         if (!exists) {
@@ -50,16 +56,20 @@ const Shop = () => {
 
     return (
         <Container>
-            <Row>
-                <Col className="products mt-4">
-                    {products.map((product) => (
-                        <Product key={product.id} handleAddToCart={handleAddToCart} product={product}></Product>
-                    ))}
-                </Col>
-                <Col className="order-summery" lg={3}>
-                    <Cart cart={cart}></Cart>
-                </Col>
-            </Row>
+            {loader ? (
+                <Loader />
+            ) : (
+                <Row>
+                    <Col className="products mt-4" lg={9}>
+                        {products.map((product) => (
+                            <Product key={product.id} handleAddToCart={handleAddToCart} product={product}></Product>
+                        ))}
+                    </Col>
+                    <Col className="order-summery" lg={3}>
+                        <Cart cart={cart}></Cart>
+                    </Col>
+                </Row>
+            )}
         </Container>
     );
 };

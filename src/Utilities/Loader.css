@@ -1,0 +1,12 @@
+.loader-btn {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    left: 0;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+    padding: 10px;
+    border-top: 1px solid #95a0a7;
+    transition-duration: 0.3s;
+}
