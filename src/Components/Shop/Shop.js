@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { addToDb, getCartItems } from "../../Utilities/fakedb";
+import { getCart } from "../../Utilities/functions";
 import Loader from "../../Utilities/Loader";
 import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
 
 const Shop = () => {
+    // Products States
     const [products, setProducts] = useState([]);
+
+    // get data from database/fake data
     useEffect(() => {
         fetch("data/products.json")
             .then((res) => res.json())
@@ -22,36 +26,29 @@ const Shop = () => {
 
     // Handle Add to Cart
     const handleAddToCart = (selectedProduct) => {
-        const exists = cart.find((product) => product.id === selectedProduct.id);
-
-        let newCart = [];
-
-        if (!exists) {
-            selectedProduct.quantity = 1;
-            newCart = [...cart, selectedProduct];
-        } else {
-            const rest = cart.filter((product) => product.id !== selectedProduct.id);
-            exists.quantity = exists.quantity + 1;
-            newCart = [...rest, exists];
-        }
-
-        setCart(newCart);
-        addToDb(selectedProduct.id);
+        getCart(cart, selectedProduct, setCart, addToDb);
     };
 
+    // displaying cart data from local storage
     useEffect(() => {
+        // get local storage data
         const cartItems = getCartItems();
+
+        // save added items with quantity updating
         const savedCart = [];
+
         for (const id in cartItems) {
+            // find product from products by ID
             const addedItem = products.find((product) => product.id === id);
 
+            // if addedItem has product
             if (addedItem) {
-                const quantity = cartItems[id];
-                addedItem.quantity = quantity;
-                savedCart.push(addedItem);
+                const quantity = cartItems[id]; // get quantities from local storage
+                addedItem.quantity = quantity; // set the quantity to product quantity properties
+                savedCart.push(addedItem); // send addedItem to savedCart
             }
         }
-        setCart(savedCart);
+        setCart(savedCart); // set state (setCart) with exists products with updated quantities
     }, [products]);
 
     return (
