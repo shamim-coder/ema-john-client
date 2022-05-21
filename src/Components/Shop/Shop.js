@@ -26,7 +26,21 @@ const Shop = () => {
 
     // Handle Add to Cart
     const handleAddToCart = (selectedProduct) => {
-        getCart(cart, selectedProduct, setCart, addToDb);
+        const exists = cart.find((product) => product.id === selectedProduct.id);
+
+        let newCart = [];
+
+        if (!exists) {
+            selectedProduct.quantity = 1;
+            newCart = [...cart, selectedProduct];
+        } else {
+            const rest = cart.filter((product) => product.id !== selectedProduct.id);
+            exists.quantity = exists.quantity + 1;
+            newCart = [...rest, exists];
+        }
+
+        setCart(newCart);
+        addToDb(selectedProduct.id);
     };
 
     // displaying cart data from local storage
