@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { addToDb, getCartItems } from "../../Utilities/fakedb";
-import { getCart } from "../../Utilities/functions";
 import Loader from "../../Utilities/Loader";
 import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";

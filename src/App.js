@@ -2,16 +2,27 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import React from "react";
 import Shop from "./Components/Shop/Shop";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Components/Home/Home";
+import Orders from "./Components/Orders/Orders";
+import Review from "./Components/Review/Review";
+import Inventory from "./Components/Inventory/Inventory";
+import Login from "./Components/Login/Login";
+import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
     return (
         <React.Fragment>
-            <header className="main-header">
-                <Header></Header>
-            </header>
-            <section>
-                <Shop></Shop>
-            </section>
+            <Header></Header>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/review" element={<Review />} />
+                <Route path="/inventory" element={<Inventory />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
         </React.Fragment>
     );
 }
