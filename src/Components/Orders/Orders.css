@@ -28,6 +28,7 @@
     justify-content: space-between;
     padding: 10px 20px;
     margin-bottom: 15px;
+    align-items: center;
 }
 .bg-red {
     background: #ff3030;
@@ -51,11 +52,16 @@ h5 {
     line-height: 2rem;
 }
 .btn-delete {
-    background-color: rgba(235, 87, 87, 0.308);
+    background-color: #eb5757;
     border: none;
     padding: 10px;
     width: 55px;
     height: 55px;
     border-radius: 50%;
     font-size: 21px;
+    color: #ffffff;
+}
+.btn-delete:hover {
+    background-color: rgba(235, 87, 87, 0.322);
+    color: #eb5757;
 }

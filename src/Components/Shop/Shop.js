@@ -53,18 +53,20 @@ const Shop = () => {
                 <Loader />
             ) : (
                 <Row>
-                    <Col className="products mt-4" lg={9}>
+                    <Col className="products mt-5" lg={9}>
                         {products.map((product) => (
                             <Product key={product.id} handleAddToCart={handleAddToCart} product={product}></Product>
                         ))}
                     </Col>
                     <Col className="order-summery" lg={3}>
                         <div className="order-sum">
-                            <Cart cart={cart}></Cart>
-                            <button onClick={handleRemove}>
+                            <div className="order-summery-cart p-4">
+                                <Cart cart={cart}></Cart>
+                            </div>
+                            <button className="btn btn-ema-john bg-red mt-4" onClick={handleRemove}>
                                 Clear Cart <FontAwesomeIcon icon={faTrashCan} />
                             </button>
-                            <button onClick={handleReviewOrder}>
+                            <button className="btn btn-ema-john bg-yellow" onClick={handleReviewOrder}>
                                 Review Order <FontAwesomeIcon icon={faArrowRight} />
                             </button>
                         </div>

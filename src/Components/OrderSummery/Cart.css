@@ -2,3 +2,9 @@
     position: sticky;
     top: 100px;
 }
+.order-summery-cart > p {
+    line-height: 35px;
+}
+.order-summery-cart h2 {
+    margin-bottom: 20px;
+}

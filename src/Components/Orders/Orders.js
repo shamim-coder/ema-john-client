@@ -2,7 +2,7 @@ import React from "react";
 import useCart from "../Hooks/useCart";
 import useProducts from "../Hooks/useProducts";
 import Cart from "..//OrderSummery/Cart";
-import { deleteShoppingCart } from "../../Utilities/fakedb";
+import { addToDb, deleteShoppingCart, removeFromDb } from "../../Utilities/fakedb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import "./Orders.css";
@@ -17,12 +17,17 @@ const Orders = () => {
         setCart([]);
         deleteShoppingCart();
     };
+    const deleteItem = (id) => {
+        const restItems = cart.filter((pd) => pd.id !== id);
+        setCart(restItems);
+        removeFromDb(id);
+    };
     return (
         <div className="container mt-5">
-            <div className="order-container row align-items-center">
+            <div className="order-container row">
                 <div className="col-lg-6">
                     {cart.map((item) => (
-                        <OrderItem key={item.id} item={item} />
+                        <OrderItem key={item.id} deleteItem={deleteItem} item={item} />
                     ))}
                 </div>
                 <div className="col-lg-6">
@@ -31,7 +36,7 @@ const Orders = () => {
                         <button className="btn btn-ema-john bg-red" onClick={handleRemove}>
                             Clear Cart <FontAwesomeIcon icon={faTrashCan} />
                         </button>
-                        <button className="btn btn-ema-john bg-yellow" onClick={handleRemove}>
+                        <button className="btn btn-ema-john bg-yellow">
                             Process Checkout <FontAwesomeIcon icon={faCreditCard} />
                         </button>
                     </div>
