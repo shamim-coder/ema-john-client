@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { faArrowRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { addToDb, getCartItems } from "../../Utilities/fakedb";
+import { useNavigate } from "react-router-dom";
+import { addToDb, deleteShoppingCart } from "../../Utilities/fakedb";
 import Loader from "../../Utilities/Loader";
+import useCart from "../Hooks/useCart";
+import useProducts from "../Hooks/useProducts";
 import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
 
 const Shop = () => {
     // Products States
-    const [products, setProducts] = useState([]);
+    const [products, , loader] = useProducts();
 
-    // get data from database/fake data
-    useEffect(() => {
-        fetch("data/products.json")
-            .then((res) => res.json())
-            .then((data) => {
-                setProducts(data);
-                setLoader(false);
-            });
-    }, []);
-
-    const [cart, setCart] = useState([]);
-    const [loader, setLoader] = useState(true);
+    const [cart, setCart] = useCart(products);
 
     // Handle Add to Cart
     const handleAddToCart = (selectedProduct) => {
@@ -42,27 +36,16 @@ const Shop = () => {
         addToDb(selectedProduct.id);
     };
 
-    // displaying cart data from local storage
-    useEffect(() => {
-        // get local storage data
-        const cartItems = getCartItems();
+    const handleRemove = () => {
+        setCart([]);
+        deleteShoppingCart();
+    };
 
-        // save added items with quantity updating
-        const savedCart = [];
+    const navigate = useNavigate();
 
-        for (const id in cartItems) {
-            // find product from products by ID
-            const addedItem = products.find((product) => product.id === id);
-
-            // if addedItem has product
-            if (addedItem) {
-                const quantity = cartItems[id]; // get quantities from local storage
-                addedItem.quantity = quantity; // set the quantity to product quantity properties
-                savedCart.push(addedItem); // send addedItem to savedCart
-            }
-        }
-        setCart(savedCart); // set state (setCart) with exists products with updated quantities
-    }, [products]);
+    const handleReviewOrder = () => {
+        navigate("/orders");
+    };
 
     return (
         <Container>
@@ -76,7 +59,15 @@ const Shop = () => {
                         ))}
                     </Col>
                     <Col className="order-summery" lg={3}>
-                        <Cart cart={cart}></Cart>
+                        <div className="order-sum">
+                            <Cart cart={cart}></Cart>
+                            <button onClick={handleRemove}>
+                                Clear Cart <FontAwesomeIcon icon={faTrashCan} />
+                            </button>
+                            <button onClick={handleReviewOrder}>
+                                Review Order <FontAwesomeIcon icon={faArrowRight} />
+                            </button>
+                        </div>
                     </Col>
                 </Row>
             )}

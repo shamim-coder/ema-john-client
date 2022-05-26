@@ -10,8 +10,8 @@ const Header = () => {
     const navigate = [
         { name: "Home", href: "/" },
         { name: "Shop", href: "/shop" },
-        { name: "Orders", href: "/orders" },
-        { name: "Order Review", href: "/review" },
+        { name: "Order Review", href: "/orders" },
+        { name: "Orders", href: "/review" },
         { name: "Manage Inventory", href: "/inventory" },
         { name: "Login", href: "/login" },
     ];
@@ -24,8 +24,8 @@ const Header = () => {
                         <img src={Logo} className="d-inline-block align-top" alt="Logo" />
                     </Navbar.Brand>
                     <Nav>
-                        {navigate.map((nav) => (
-                            <Link className="nav-link" to={nav.href}>
+                        {navigate.map((nav, index) => (
+                            <Link key={index} className="nav-link" to={nav.href}>
                                 {nav.name}
                             </Link>
                         ))}

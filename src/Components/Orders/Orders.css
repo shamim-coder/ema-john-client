@@ -1,0 +1,61 @@
+.cart {
+    background: rgba(255, 153, 0, 0.312);
+    width: 451px;
+    margin-left: auto;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+.summery {
+    padding: 30px;
+}
+.summery h2 {
+    font-size: 50px;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+.summery p {
+    font-size: 21px;
+}
+.summery h2,
+.summery p {
+    line-height: 50px;
+}
+.btn-ema-john {
+    width: 100%;
+    font-size: 18px;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+}
+.bg-red {
+    background: #ff3030;
+}
+.bg-yellow {
+    background: #ff9900;
+}
+.text-red {
+    color: #ff3030;
+}
+.text-yellow {
+    color: #ff9900;
+}
+.order-img {
+    object-fit: cover;
+    object-position: center;
+}
+.order-text > p,
+h5 {
+    margin: 0;
+    line-height: 2rem;
+}
+.btn-delete {
+    background-color: rgba(235, 87, 87, 0.308);
+    border: none;
+    padding: 10px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-size: 21px;
+}
