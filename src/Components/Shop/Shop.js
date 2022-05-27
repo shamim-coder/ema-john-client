@@ -11,7 +11,7 @@ import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
 
-const Shop = () => {
+const Shop = ({ getCart }) => {
     // Products States
     const [products, , loader] = useProducts();
 
@@ -34,6 +34,7 @@ const Shop = () => {
 
         setCart(newCart);
         addToDb(selectedProduct.id);
+        getCart(newCart);
     };
 
     const handleRemove = () => {
