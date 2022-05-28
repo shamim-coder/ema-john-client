@@ -1,8 +1,9 @@
 import { faArrowRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../App";
 import { addToDb, deleteShoppingCart } from "../../Utilities/fakedb";
 import Loader from "../../Utilities/Loader";
 import useCart from "../Hooks/useCart";
@@ -11,9 +12,11 @@ import Cart from "../OrderSummery/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
 
-const Shop = ({ getCart }) => {
+const Shop = () => {
     // Products States
     const [products, , loader] = useProducts();
+
+    const [, setHeaderCart] = useContext(CartContext);
 
     const [cart, setCart] = useCart(products);
 
@@ -34,11 +37,12 @@ const Shop = ({ getCart }) => {
 
         setCart(newCart);
         addToDb(selectedProduct.id);
-        getCart(newCart);
+        setHeaderCart(newCart);
     };
 
     const handleRemove = () => {
         setCart([]);
+        setHeaderCart([]);
         deleteShoppingCart();
     };
 

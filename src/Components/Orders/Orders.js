@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import useCart from "../Hooks/useCart";
 import useProducts from "../Hooks/useProducts";
 import Cart from "..//OrderSummery/Cart";
-import { addToDb, deleteShoppingCart, removeFromDb } from "../../Utilities/fakedb";
+import { deleteShoppingCart, removeFromDb } from "../../Utilities/fakedb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import "./Orders.css";
 import OrderItem from "./OrderItem";
+import { CartContext } from "../../App";
 
 const Orders = () => {
     const [products] = useProducts();
+    const [, setHeaderCart] = useContext(CartContext);
 
     const [cart, setCart] = useCart(products);
 
     const handleRemove = () => {
         setCart([]);
+        setHeaderCart([]);
         deleteShoppingCart();
     };
     const deleteItem = (id) => {
         const restItems = cart.filter((pd) => pd.id !== id);
         setCart(restItems);
+        setHeaderCart(restItems);
         removeFromDb(id);
     };
     return (

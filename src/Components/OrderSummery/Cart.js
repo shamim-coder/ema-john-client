@@ -2,7 +2,7 @@ import React from "react";
 import { calculateTax, calculateTotal } from "../../Utilities/functions";
 import "./Cart.css";
 
-const Cart = ({ cart, handleRemove }) => {
+const Cart = ({ cart }) => {
     const quantity = calculateTotal(cart, "quantity");
     let total = 0;
 

@@ -12,21 +12,23 @@ import NotFound from "./Components/NotFound/NotFound";
 export const CartContext = createContext(0);
 
 function App() {
+    
     const [cart, setCart] = useState([]);
 
     return (
         <React.Fragment>
-            <CartContext.Provider value={cart}>
+            <CartContext.Provider value={[cart, setCart]}>
                 <Header></Header>
+
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/shop" element={<Shop />} />
+                    <Route path="/orders" element={<Orders />} />
+                    <Route path="/inventory" element={<Inventory />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
             </CartContext.Provider>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<Shop getCart={setCart} />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/inventory" element={<Inventory />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
         </React.Fragment>
     );
 }

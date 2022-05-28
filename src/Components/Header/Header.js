@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
 import Logo from "../../Images/Logo.svg";
@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../App";
+import useProducts from "../Hooks/useProducts";
+import useCart from "../Hooks/useCart";
 
 const Header = () => {
     const menuItems = [
@@ -19,7 +21,15 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    const cart = useContext(CartContext);
+    const [headerCart, setHeaderCart] = useContext(CartContext);
+
+    const [products] = useProducts();
+
+    const [cart] = useCart(products);
+
+    useEffect(() => {
+        setHeaderCart(cart);
+    }, [cart, setHeaderCart]);
 
     return (
         <header className="main-header">
@@ -36,7 +46,7 @@ const Header = () => {
                         ))}
 
                         <div onClick={() => navigate("/orders")} type="button" style={{ color: "white" }} className="btn position-relative">
-                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">{cart.length}</span>
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">{headerCart.length}</span>
                             <FontAwesomeIcon icon={faShoppingCart} />
                         </div>
                     </Nav>
