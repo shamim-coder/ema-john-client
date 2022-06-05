@@ -1,9 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
+import auth from "../../Firebase.init";
+import googleIcon from "../../Images/google.svg";
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [errorMessage, setErrorMessage] = useState("");
+    const [success, setSuccess] = useState("");
+
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+
+    const handleSignIn = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(email, password);
+        if (!user) {
+            setErrorMessage(error.message);
+        }
+    };
+
     return (
-        <div>
-            <h2>Login your account</h2>
+        <div className="d-flex justify-content-center align-items-center container ">
+            <div className="form-style px-4 py-5 rounded-3 my-5">
+                <h2 className="text-center">Login</h2>
+                <form className="d-inline-flex flex-column justify-content-center w-100" onSubmit={handleSignIn}>
+                    <label className="mb-3" htmlFor="signupEmail">
+                        <p className="mb-2">Email</p>
+                        <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder="Email address" id="signupEmail" required />
+                    </label>
+                    <label className="mb-3" htmlFor="signupPassword">
+                        <p className="mb-2">Password</p>
+                        <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder="Password" id="signupPassword" required />
+                    </label>
+
+                    <input className="form-style-btn mb-3 rounded" type="submit" value="Sign Up" />
+                </form>
+                <div className="text-center">
+                    <p>
+                        New to Ema-john?{" "}
+                        <Link className="text-orange text-decoration-none" to="/signup">
+                            Create New Account
+                        </Link>
+                    </p>
+                    <p className="or my-3">or</p>
+                    <button style={{ border: "1px solid #95a0a7" }} className="w-100 d-flex align-items-center justify-content-center gap-2 py-2 rounded bg-white">
+                        <img width="20" height="20" src={googleIcon} alt="" />
+                        Continue with Google
+                    </button>
+                </div>
+                <p className="text-center mt-3" style={{ color: error ? "red" : "green" }}>
+                    {success && success} {error && error}
+                </p>
+            </div>
         </div>
     );
 };

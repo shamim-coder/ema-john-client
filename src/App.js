@@ -8,11 +8,11 @@ import Orders from "./Components/Orders/Orders";
 import Inventory from "./Components/Inventory/Inventory";
 import Login from "./Components/Login/Login";
 import NotFound from "./Components/NotFound/NotFound";
+import SignUp from "./Components/SignUp/SignUp";
 
 export const CartContext = createContext(0);
 
 function App() {
-    
     const [cart, setCart] = useState([]);
 
     return (
@@ -26,6 +26,7 @@ function App() {
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/inventory" element={<Inventory />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </CartContext.Provider>
