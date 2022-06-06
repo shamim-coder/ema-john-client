@@ -8,7 +8,7 @@ import { addToDb, deleteShoppingCart } from "../../Utilities/fakedb";
 import Loader from "../../Utilities/Loader";
 import useCart from "../Hooks/useCart";
 import useProducts from "../Hooks/useProducts";
-import Cart from "../OrderSummery/Cart";
+import OrderSummery from "../OrderSummery/OrderSummery";
 import Product from "../Product/Product";
 import "./Shop.css";
 
@@ -66,13 +66,13 @@ const Shop = () => {
                     <Col className="order-summery" lg={3}>
                         <div className="order-sum">
                             <div className="order-summery-cart p-4">
-                                <Cart cart={cart}></Cart>
+                                <OrderSummery cart={cart}></OrderSummery>
                             </div>
                             <button className="btn btn-ema-john bg-red mt-4" onClick={handleRemove}>
                                 Clear Cart <FontAwesomeIcon icon={faTrashCan} />
                             </button>
                             <button className="btn btn-ema-john bg-yellow" onClick={handleReviewOrder}>
-                                Review Order <FontAwesomeIcon icon={faArrowRight} />
+                                View Carts <FontAwesomeIcon icon={faArrowRight} />
                             </button>
                         </div>
                     </Col>

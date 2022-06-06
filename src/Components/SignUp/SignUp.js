@@ -15,22 +15,27 @@ const SignUp = () => {
 
     const navigate = useNavigate();
 
-    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         if (password !== confirmPassword) {
-            setSuccess("");
             setErrorMessage("Your password didn't match");
             return;
         } else if (password.length < 6) {
-            setSuccess("");
-            setErrorMessage("Your password should at least 6 characters");
+            setErrorMessage("Password should at least 6 characters");
             return;
         }
 
         createUserWithEmailAndPassword(email, password);
     };
+
+    if (user) {
+        navigate("/login");
+    }
+
+    console.log(user);
 
     return (
         <div className="d-flex justify-content-center align-items-center container ">
@@ -72,8 +77,8 @@ const SignUp = () => {
                         <img width="20" height="20" src={googleIcon} alt="" /> Continue with Google
                     </button>
                 </div>
-                <p className="text-center mt-3" style={{ color: error ? "red" : "green" }}>
-                    {user && success} {error && errorMessage}
+                <p className="text-center mt-3" style={{ color: "red" }}>
+                    {error?.message || errorMessage}
                 </p>
             </div>
         </div>

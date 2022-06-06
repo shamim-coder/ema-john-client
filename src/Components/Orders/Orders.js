@@ -1,19 +1,22 @@
 import React, { useContext } from "react";
 import useCart from "../Hooks/useCart";
 import useProducts from "../Hooks/useProducts";
-import Cart from "..//OrderSummery/Cart";
+import OrderSummery from "../OrderSummery/OrderSummery";
 import { deleteShoppingCart, removeFromDb } from "../../Utilities/fakedb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import "./Orders.css";
 import OrderItem from "./OrderItem";
 import { CartContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
     const [products] = useProducts();
     const [, setHeaderCart] = useContext(CartContext);
 
     const [cart, setCart] = useCart(products);
+
+    const navigate = useNavigate();
 
     const handleRemove = () => {
         setCart([]);
@@ -36,11 +39,11 @@ const Orders = () => {
                 </div>
                 <div className="col-lg-6">
                     <div className="cart">
-                        <div className="summery">{<Cart cart={cart} />}</div>
+                        <div className="summery">{<OrderSummery cart={cart} />}</div>
                         <button className="btn btn-ema-john bg-red" onClick={handleRemove}>
                             Clear Cart <FontAwesomeIcon icon={faTrashCan} />
                         </button>
-                        <button className="btn btn-ema-john bg-yellow">
+                        <button onClick={() => navigate("/shipping")} className="btn btn-ema-john bg-yellow">
                             Process Checkout <FontAwesomeIcon icon={faCreditCard} />
                         </button>
                     </div>

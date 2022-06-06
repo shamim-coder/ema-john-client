@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
+import { useAuthState, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../Firebase.init";
 import googleIcon from "../../Images/google.svg";
 
@@ -11,15 +12,35 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [success, setSuccess] = useState("");
 
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
+
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
     const handleSignIn = (e) => {
         e.preventDefault();
+
         signInWithEmailAndPassword(email, password);
-        if (!user) {
-            setErrorMessage(error.message);
-        }
     };
+
+    if (user) {
+        navigate(from, { replace: true });
+    }
+
+    // const customError = () => {
+    //     if (error.code === "auth/wrong-password") {
+    //         return "your password is wrong, please enter valid password!";
+    //     } else if (error.code === "auth/user-not-found") {
+    //         return "this email you enter is not exist in our database. please register your account!";
+    //     } else if (error.code === "auth/too-many-requests") {
+    //         return "Access to this account has been temporarily disabled due to many failed login attempts.";
+    //     } else {
+    //         return "";
+    //     }
+    // };
 
     return (
         <div className="d-flex justify-content-center align-items-center container ">
@@ -35,7 +56,15 @@ const Login = () => {
                         <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder="Password" id="signupPassword" required />
                     </label>
 
-                    <input className="form-style-btn mb-3 rounded" type="submit" value="Sign Up" />
+                    <button className="form-style-btn mb-3 rounded" type="submit">
+                        {loading ? (
+                            <Spinner animation="border" role="status" size="sm">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        ) : (
+                            "Login"
+                        )}
+                    </button>
                 </form>
                 <div className="text-center">
                     <p>
@@ -50,8 +79,8 @@ const Login = () => {
                         Continue with Google
                     </button>
                 </div>
-                <p className="text-center mt-3" style={{ color: error ? "red" : "green" }}>
-                    {success && success} {error && error}
+                <p className="text-center mt-3" style={{ color: "red" }}>
+                    {error ? error?.message : undefined}
                 </p>
             </div>
         </div>

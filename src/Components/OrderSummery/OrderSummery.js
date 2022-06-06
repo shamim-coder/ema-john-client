@@ -1,8 +1,8 @@
 import React from "react";
 import { calculateTax, calculateTotal } from "../../Utilities/functions";
-import "./Cart.css";
+import "./OrderSummery.css";
 
-const Cart = ({ cart }) => {
+const OrderSummery = ({ cart }) => {
     const quantity = calculateTotal(cart, "quantity");
     let total = 0;
 
@@ -25,4 +25,4 @@ const Cart = ({ cart }) => {
     );
 };
 
-export default Cart;
+export default OrderSummery;
