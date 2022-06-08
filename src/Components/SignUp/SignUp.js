@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import auth from "../../Firebase.init";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
+import { signOut } from "firebase/auth";
 
 const SignUp = () => {
     const [email, setEmail] = useState("");
@@ -28,14 +29,14 @@ const SignUp = () => {
             return;
         }
 
-        createUserWithEmailAndPassword(email, password);
+        createUserWithEmailAndPassword(email, password).then(() => {
+            signOut(auth);
+        });
     };
 
     if (user) {
         navigate("/login");
     }
-
-    console.log(user);
 
     return (
         <div className="d-flex justify-content-center align-items-center container ">
@@ -55,15 +56,9 @@ const SignUp = () => {
                         <input onChange={(e) => setConfirmPassword(e.target.value)} required value={confirmPassword} type="password" placeholder="Confirm Password" id="signupConfirmPassword" />
                     </label>
 
-                    <button className="form-style-btn mb-3 rounded" type="submit">
-                        {loading ? (
-                            <Spinner animation="border" role="status" size="sm">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
-                        ) : (
-                            "Sign Up"
-                        )}
-                    </button>
+                    <Button variant="warning" className="form-style-btn mb-3 rounded btn btn-transparent" type="submit">
+                        {loading ? <Spinner as="span" animation="border" size="sm" role="status" /> : "Sign Up"}
+                    </Button>
                 </form>
                 <div className="text-center">
                     <p>
