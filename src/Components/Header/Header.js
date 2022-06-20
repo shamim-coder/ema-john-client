@@ -24,7 +24,7 @@ const Header = () => {
 
     const navigate = useNavigate();
     const [headerCart, setHeaderCart] = useContext(CartContext);
-    const [products] = useProducts();
+    const { products } = useProducts();
     const [cart] = useCart(products);
 
     useEffect(() => {

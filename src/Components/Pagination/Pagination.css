@@ -1,0 +1,8 @@
+.pagination-btn {
+    background-color: #ff9900;
+}
+
+.ema-pagination .page-active {
+    background-color: #f47a01;
+    color: white;
+}
