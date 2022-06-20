@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 const useProducts = () => {
     const [products, setProducts] = useState([]);
     const [loader, setLoader] = useState(true);
+
     useEffect(() => {
-        fetch("Data/products.json")
+        const url = `http://localhost:5000/products`;
+        fetch(url)
             .then((res) => res.json())
             .then((data) => {
                 setProducts(data);
                 setLoader(false);
             });
     }, []);
-    return [products, setProducts, loader];
+    return { products, setProducts, loader };
 };
 
 export default useProducts;

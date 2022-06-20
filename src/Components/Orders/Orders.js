@@ -11,7 +11,7 @@ import { CartContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
-    const [products] = useProducts();
+    const { products } = useProducts();
     const [, setHeaderCart] = useContext(CartContext);
 
     const [cart, setCart] = useCart(products);
@@ -24,7 +24,7 @@ const Orders = () => {
         deleteShoppingCart();
     };
     const deleteItem = (id) => {
-        const restItems = cart.filter((pd) => pd.id !== id);
+        const restItems = cart.filter((pd) => pd._id !== id);
         setCart(restItems);
         setHeaderCart(restItems);
         removeFromDb(id);
@@ -32,22 +32,28 @@ const Orders = () => {
     return (
         <div className="container mt-5">
             <div className="order-container row">
-                <div className="col-lg-6">
-                    {cart.map((item) => (
-                        <OrderItem key={item.id} deleteItem={deleteItem} item={item} />
-                    ))}
-                </div>
-                <div className="col-lg-6">
-                    <div className="cart">
-                        <div className="summery">{<OrderSummery cart={cart} />}</div>
-                        <button className="btn btn-ema-john bg-red" onClick={handleRemove}>
-                            Clear Cart <FontAwesomeIcon icon={faTrashCan} />
-                        </button>
-                        <button onClick={() => navigate("/shipping")} className="btn btn-ema-john bg-yellow">
-                            Process Checkout <FontAwesomeIcon icon={faCreditCard} />
-                        </button>
-                    </div>
-                </div>
+                {cart.length ? (
+                    <>
+                        <div className="col-lg-6">
+                            {cart.map((item) => (
+                                <OrderItem key={item._id} deleteItem={deleteItem} item={item} />
+                            ))}
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="cart">
+                                <div className="summery">{<OrderSummery cart={cart} />}</div>
+                                <button className="btn btn-ema-john bg-red" onClick={handleRemove}>
+                                    Clear Cart <FontAwesomeIcon icon={faTrashCan} />
+                                </button>
+                                <button onClick={() => navigate("/shipping")} className="btn btn-ema-john bg-yellow">
+                                    Process Checkout <FontAwesomeIcon icon={faCreditCard} />
+                                </button>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <h4 className="text-center">Your cart is empty</h4>
+                )}
             </div>
         </div>
     );

@@ -25,7 +25,7 @@ const OrderItem = ({ item, deleteItem }) => {
                 <p>Qt: {quantity}</p>
             </div>
             <div className="col-md-2 text-center">
-                <button onClick={() => deleteItem(item.id)} className="text-red btn-delete">
+                <button onClick={() => deleteItem(item._id)} className="text-red btn-delete">
                     <FontAwesomeIcon icon={faTrashCan} />
                 </button>
             </div>
