@@ -9,12 +9,13 @@ import "./Orders.css";
 import OrderItem from "./OrderItem";
 import { CartContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 const Orders = () => {
     const { products } = useProducts();
     const [, setHeaderCart] = useContext(CartContext);
 
-    const [cart, setCart] = useCart(products);
+    const { cart, setCart, loading } = useCart(products);
 
     const navigate = useNavigate();
 
@@ -31,30 +32,36 @@ const Orders = () => {
     };
     return (
         <div className="container mt-5">
-            <div className="order-container row">
-                {cart.length ? (
-                    <>
-                        <div className="col-lg-6">
-                            {cart.map((item) => (
-                                <OrderItem key={item._id} deleteItem={deleteItem} item={item} />
-                            ))}
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="cart">
-                                <div className="summery">{<OrderSummery cart={cart} />}</div>
-                                <button className="btn btn-ema-john bg-red" onClick={handleRemove}>
-                                    Clear Cart <FontAwesomeIcon icon={faTrashCan} />
-                                </button>
-                                <button onClick={() => navigate("/shipping")} className="btn btn-ema-john bg-yellow">
-                                    Process Checkout <FontAwesomeIcon icon={faCreditCard} />
-                                </button>
+            {loading ? (
+                <Spinner className="loading-spinner" animation="grow" role="status" variant="warning">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            ) : (
+                <div className="order-container row">
+                    {cart.length ? (
+                        <>
+                            <div className="col-lg-6">
+                                {cart.map((item) => (
+                                    <OrderItem key={item._id} deleteItem={deleteItem} item={item} />
+                                ))}
                             </div>
-                        </div>
-                    </>
-                ) : (
-                    <h4 className="text-center">Your cart is empty</h4>
-                )}
-            </div>
+                            <div className="col-lg-6">
+                                <div className="cart">
+                                    <div className="summery">{<OrderSummery cart={cart} />}</div>
+                                    <button className="btn btn-ema-john bg-red" onClick={handleRemove}>
+                                        Clear Cart <FontAwesomeIcon icon={faTrashCan} />
+                                    </button>
+                                    <button onClick={() => navigate("/shipping")} className="btn btn-ema-john bg-yellow">
+                                        Process Checkout <FontAwesomeIcon icon={faCreditCard} />
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <h4 className="text-center">Your cart is empty</h4>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

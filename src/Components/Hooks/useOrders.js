@@ -6,6 +6,7 @@ import auth from "../../Firebase.init";
 const useOrders = () => {
     const [user] = useAuthState(auth);
     const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getData = async () => {
@@ -17,13 +18,14 @@ const useOrders = () => {
                     },
                 });
                 setOrders(data);
+                setLoading(false);
             } catch (error) {
                 console.error(error.message);
             }
         };
         getData();
     }, [user]);
-    return { orders, setOrders };
+    return { orders, setOrders, loading };
 };
 
 export default useOrders;

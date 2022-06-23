@@ -16,7 +16,7 @@ const Shipping = () => {
     const [address, setAddress] = useState("");
     const [number, setNumber] = useState("");
     const { products } = useProducts();
-    const [cart, setCart] = useCart(products);
+    const {cart, setCart} = useCart(products);
     const navigate = useNavigate();
     const [, setHeaderCart] = useContext(CartContext);
 

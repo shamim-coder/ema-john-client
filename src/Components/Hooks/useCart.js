@@ -3,6 +3,7 @@ import { getCartItems } from "../../Utilities/fakedb";
 
 const useCart = () => {
     const [cart, setCart] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // displaying cart data from local storage
     useEffect(() => {
@@ -33,10 +34,12 @@ const useCart = () => {
                         savedCart.push(addedItem); // send addedItem to savedCart
                     }
                 }
+
                 setCart(savedCart); // set state (setCart) with exists products with updated quantities
+                setLoading(false);
             });
     }, []);
-    return [cart, setCart];
+    return { cart, setCart, loading };
 };
 
 export default useCart;
