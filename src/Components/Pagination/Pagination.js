@@ -9,7 +9,7 @@ const Pagination = ({ setProducts }) => {
     const [size, setSize] = useState(6);
 
     useEffect(() => {
-        const url = `http://localhost:8888/products?page=${page}&size=${size}`;
+        const url = `https://ema-john-api.herokuapp.com/products?page=${page}&size=${size}`;
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
@@ -18,7 +18,7 @@ const Pagination = ({ setProducts }) => {
     }, [page, setProducts, size]);
 
     useEffect(() => {
-        fetch("http://localhost:8888/nop")
+        fetch("https://ema-john-api.herokuapp.com/nop")
             .then((res) => res.json())
             .then((data) => {
                 const numberOfPage = data.count / size;

@@ -11,7 +11,7 @@ const useOrders = () => {
         const getData = async () => {
             const email = user?.email;
             try {
-                const { data } = await axios.get(`http://localhost:8888/orders?email=${email}`, {
+                const { data } = await axios.get(`https://ema-john-api.herokuapp.com/orders?email=${email}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("access-token")}`,
                     },
