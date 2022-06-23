@@ -28,10 +28,10 @@ const Pagination = ({ setProducts }) => {
 
     return (
         <>
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex justify-content-between align-items-start mb-4 ">
                 <nav>
-                    <ul className="pagination ema-pagination">
-                        <li className={`page-item ${page === 0 ? "disabled" : ""}`}>
+                    <ul className="pagination ema-pagination flex-wrap mb-0 me-3" style={{ gridRowGap: "15px" }}>
+                        <li className={` page-item ${page === 0 ? "disabled" : ""}`}>
                             <button onClick={() => setPage(page - 1)} className="page-link">
                                 Previous
                             </button>
@@ -53,7 +53,7 @@ const Pagination = ({ setProducts }) => {
                 </nav>
 
                 <div className="page-item d-flex align-items-center gap-2">
-                    Number of Item
+                    Show
                     <select className="page-link" onChange={(e) => setSize(e.target.value)} name="page" id="page">
                         <option defaultValue="6">6</option>
                         <option value="9">9</option>

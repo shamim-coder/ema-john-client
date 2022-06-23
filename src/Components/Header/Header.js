@@ -38,9 +38,9 @@ const Header = () => {
             <Navbar variant="dark">
                 <Container>
                     <Link className="me-auto" to="/">
-                        <img src={Logo} className="d-inline-block align-top" alt="Logo" />
+                        <img src={Logo} className="d-md-inline-block align-top" alt="Logo" />
                     </Link>
-                    <Nav>
+                    <Nav className="d-flex flex-wrap">
                         <Link className="nav-link" to="/">
                             Home
                         </Link>

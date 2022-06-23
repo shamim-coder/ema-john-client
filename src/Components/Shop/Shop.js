@@ -61,8 +61,8 @@ const Shop = () => {
             {loader ? (
                 <Loader />
             ) : (
-                <Row>
-                    <Col className="mt-5" lg={9}>
+                <Row className="mb-5">
+                    <Col className="mt-5 pe-lg-5 order-2 order-lg-1" lg={9}>
                         <Pagination setProducts={setProducts}></Pagination>
                         <div className="products">
                             {products.map((product) => (
@@ -70,7 +70,7 @@ const Shop = () => {
                             ))}
                         </div>
                     </Col>
-                    <Col className="order-summery" lg={3}>
+                    <Col className="order-summery order-1 order-lg-2 mt-5 mt-lg-0 pb-3" lg={3}>
                         <div className="order-sum">
                             <div className="order-summery-cart p-4">
                                 <OrderSummery cart={cart}></OrderSummery>
