@@ -5,7 +5,7 @@ const useProducts = () => {
     const [loader, setLoader] = useState(true);
 
     useEffect(() => {
-        const url = `http://localhost:5000/products`;
+        const url = `https://ema-john-api.herokuapp.com/products`;
         fetch(url)
             .then((res) => res.json())
             .then((data) => {

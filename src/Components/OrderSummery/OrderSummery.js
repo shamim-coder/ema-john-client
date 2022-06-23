@@ -5,7 +5,7 @@ import "./OrderSummery.css";
 const OrderSummery = ({ cart }) => {
     const quantity = calculateTotal(cart, "quantity");
     let total = 0;
-    console.log(cart);
+
     for (const product of cart) {
         total = total + product.price * product.quantity;
     }

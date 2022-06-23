@@ -11,6 +11,7 @@ import NotFound from "./Components/NotFound/NotFound";
 import SignUp from "./Components/SignUp/SignUp";
 import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import Shipping from "./Components/Shipping/Shipping";
+import OrderConfirmed from "./Components/OrderConfirmed/OrderConfirmed";
 
 export const CartContext = createContext(0);
 
@@ -39,6 +40,14 @@ function App() {
                         element={
                             <RequireAuth>
                                 <Shipping />
+                            </RequireAuth>
+                        }
+                    />
+                    <Route
+                        path="/orderConfirmed"
+                        element={
+                            <RequireAuth>
+                                <OrderConfirmed />
                             </RequireAuth>
                         }
                     />
