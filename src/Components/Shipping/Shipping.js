@@ -42,7 +42,7 @@ const Shipping = () => {
         }
 
         try {
-            const response = await axios.post("https://ema-john-api.herokuapp.com/orders", orderInfo);
+            const response = await axios.post("http://localhost:8888/orders", orderInfo);
             console.log(response);
             if (response.status === 200) {
                 e.target.reset();

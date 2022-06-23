@@ -1,32 +1,33 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
-import { useAuthState, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../Firebase.init";
 import googleIcon from "../../Images/google.svg";
+import useToken from "../Hooks/useToken";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const [errorMessage, setErrorMessage] = useState("");
-    const [success, setSuccess] = useState("");
+    // const [errorMessage, setErrorMessage] = useState("");
+    // const [success, setSuccess] = useState("");
 
     const navigate = useNavigate();
-
     const location = useLocation();
 
     const from = location.state?.from?.pathname || "/";
 
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
-    const handleSignIn = (e) => {
-        e.preventDefault();
+    const { token } = useToken(user);
 
+    const handleSignIn = async (e) => {
+        e.preventDefault();
         signInWithEmailAndPassword(email, password);
     };
 
-    if (user) {
+    if (token) {
         navigate(from, { replace: true });
     }
 

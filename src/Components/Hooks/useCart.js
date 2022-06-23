@@ -13,7 +13,7 @@ const useCart = () => {
         // save added items with quantity updating
         const savedCart = [];
 
-        fetch("https://ema-john-api.herokuapp.com/product_by_keys", {
+        fetch("http://localhost:8888/product_by_keys", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
