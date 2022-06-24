@@ -5,7 +5,6 @@ import OrderRow from "../ManageOrders/OrderRow";
 
 const ManageOrders = () => {
     const { orders, loading } = useOrders();
-    console.log(orders);
 
     return (
         <div className="container my-5">
