@@ -57,11 +57,11 @@ const Header = () => {
                             Manage Inventory
                         </Link>
                         {user ? (
-                            <button onClick={() => signOut(auth)} className="btn btn-link">
+                            <button onClick={() => signOut(auth)} className="btn btn-link nav-link text-warning">
                                 Logout
                             </button>
                         ) : (
-                            <Link className="nav-link" to="/login">
+                            <Link className="nav-link text-warning" to="/login">
                                 Login
                             </Link>
                         )}

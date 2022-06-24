@@ -18,7 +18,7 @@ const ManageOrders = () => {
                     <div key={order?._id} className="table table-striped mb-5">
                         <div className="row">
                             <h4>
-                                Order <span className="fs-5 text-info">#{order?._id}</span>
+                                Order <span className="fs-5 text-info">#{order?._id.replace(/\D/g, "")}</span>
                             </h4>
                             <p>Place on {order?.orderTime}</p>
                         </div>

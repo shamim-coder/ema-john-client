@@ -13,6 +13,7 @@ import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import Shipping from "./Components/Shipping/Shipping";
 import OrderConfirmed from "./Components/OrderConfirmed/OrderConfirmed";
 import ManageOrders from "./Components/ManageOrders/ManageOrders";
+import Verification from "./Components/Verification/Verification";
 
 export const CartContext = createContext(0);
 
