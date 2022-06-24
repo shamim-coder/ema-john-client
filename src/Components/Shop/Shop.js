@@ -2,7 +2,7 @@ import { faArrowRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../App";
 import { addToDb, deleteShoppingCart } from "../../Utilities/fakedb";
@@ -20,7 +20,7 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [, setHeaderCart] = useContext(CartContext);
     const { cart, setCart } = useCart();
-    const [loading, setLoading] = useState(true);
+
     // Handle Add to Cart
     const handleAddToCart = (selectedProduct) => {
         const exists = cart.find((product) => product._id === selectedProduct._id);
@@ -60,7 +60,7 @@ const Shop = () => {
             ) : (
                 <Row className="mb-5">
                     <Col className="mt-5 pe-lg-5 order-2 order-lg-1" lg={9}>
-                        <Pagination setLoading={setLoading} setProducts={setProducts}></Pagination>
+                        <Pagination setProducts={setProducts}></Pagination>
                         <div className="products">
                             {products.map((product) => (
                                 <Product key={product._id} handleAddToCart={handleAddToCart} product={product}></Product>

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "./Pagination.css";
 
-const Pagination = ({ setProducts, setLoading }) => {
+const Pagination = ({ setProducts }) => {
     const [pageNumber, setPageNumber] = useState();
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(6);
@@ -14,9 +14,8 @@ const Pagination = ({ setProducts, setLoading }) => {
             .then((res) => res.json())
             .then((data) => {
                 setProducts(data);
-                setLoading(false);
             });
-    }, [page, setLoading, setProducts, size]);
+    }, [page, setProducts, size]);
 
     useEffect(() => {
         fetch("https://ema-john-api.herokuapp.com/nop")
