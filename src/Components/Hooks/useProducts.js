@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const useProducts = () => {
@@ -6,12 +7,16 @@ const useProducts = () => {
 
     useEffect(() => {
         const url = `https://ema-john-api.herokuapp.com/products`;
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
+        const getData = async () => {
+            try {
+                const { data } = await axios.get(url);
                 setProducts(data);
                 setLoader(false);
-            });
+            } catch (err) {
+                console.log(err.message);
+            }
+        };
+        getData();
     }, []);
     return { products, setProducts, loader };
 };

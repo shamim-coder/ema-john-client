@@ -2,7 +2,7 @@ import { faArrowRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../App";
 import { addToDb, deleteShoppingCart } from "../../Utilities/fakedb";
@@ -56,7 +56,9 @@ const Shop = () => {
     return (
         <Container>
             {loader ? (
-                <Loader />
+                <Spinner className="loading-spinner" animation="grow" role="status" variant="warning">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             ) : (
                 <Row className="mb-5">
                     <Col className="mt-5 pe-lg-5 order-2 order-lg-1" lg={9}>
